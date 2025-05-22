@@ -13,5 +13,9 @@ class AppRouter extends RootStackRouter {
           path: Routes.usersList,
           initial: true,
         ),
+        AutoRoute(
+          page: UserDetailsRoute.page,
+          path: Routes.userDetails,
+        ),
       ];
 }

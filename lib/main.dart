@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  await ApplicationDependenciesResolver.resolve();
+  ApplicationDependenciesResolver.resolve();
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
