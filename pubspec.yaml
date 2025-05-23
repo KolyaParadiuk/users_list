@@ -14,6 +14,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_native_splash: ^2.4.6
   get_it: ^8.0.3
   google_fonts: ^6.2.1
   gradient_borders: ^1.0.1
@@ -36,4 +37,7 @@ flutter:
   assets: 
     - assets/translations/
     - assets/images/
+
+flutter_native_splash:
+  color: "#472F49"
 
