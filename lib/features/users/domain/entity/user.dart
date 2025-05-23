@@ -10,6 +10,7 @@ class User extends Equatable {
     required this.address,
     required this.birthDate,
     this.maidenName,
+    this.image,
   });
 
   final int id;
@@ -19,7 +20,10 @@ class User extends Equatable {
   final int age;
   final Address address;
   final String birthDate;
+  final String? image;
 
   @override
   List<Object?> get props => [id, firstName, lastName];
+
+  String get fullName => '$firstName $maidenName $lastName';
 }

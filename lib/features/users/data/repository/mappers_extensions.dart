@@ -12,6 +12,7 @@ extension UserDtoX on UserDto {
         age: age,
         address: address.toEntity(),
         birthDate: birthDate,
+        image: image,
       );
 }
 
