@@ -20,7 +20,7 @@ class ApplicationDependenciesResolver {
   static void _common(
     NetworkConfig networkConfig,
   ) {
-    di.registerSingleton<UsersApi>(UsersApi(_getDio(networkConfig)));
+    di.registerSingleton<UsersApi>(UsersApiV2(_getDio(networkConfig)));
   }
 
   // Register feature-specific dependencies through their own resolvers
