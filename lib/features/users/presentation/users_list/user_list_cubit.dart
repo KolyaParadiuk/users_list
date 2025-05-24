@@ -24,6 +24,11 @@ class UserListCubit extends Cubit<UserListState> {
   }
 
   Future<void> loadMoreUsers() async {
+    // Using Dart's pattern matching to handle only the UserListLoaded state
+    // This is a more concise alternative to traditional if/else with 'is' operator
+    // Only proceeds if the current state is UserListLoaded,
+    // otherwise does nothing
+
     if (state case final UserListLoaded loadedState) {
       if (loadedState.isLoadingMore) {
         return;

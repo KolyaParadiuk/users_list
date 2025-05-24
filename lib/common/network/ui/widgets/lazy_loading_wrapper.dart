@@ -30,6 +30,15 @@ class _LazyLoadingListState extends State<LazyLoadingWrapper> {
   }
 
   void _onScroll() {
+    // Trigger loading more data when user has scrolled
+    // to within 100 pixels of the end
+    //
+    // This provides a smoother UX by loading the next batch of data
+    // before the user reaches the very end
+    //
+    // Also checks if scroll position is within valid range
+    // to prevent unnecessary API calls
+
     if (widget.controller.offset >=
             widget.controller.position.maxScrollExtent - 100 &&
         !widget.controller.position.outOfRange) {

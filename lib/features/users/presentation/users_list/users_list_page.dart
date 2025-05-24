@@ -28,6 +28,8 @@ class UsersListPage extends StatelessWidget {
         body: PageColorBox(
           child: BlocBuilder<UserListCubit, UserListState>(
             builder: (context, state) {
+              // Using Dart's switch expression to handle different UI states
+              // This ensures exhaustive handling of all sealed class variants
               return switch (state) {
                 UserListInitial() => const LoadingWidget(),
                 UserListLoaded() => _UsersListBody(state: state),
@@ -94,6 +96,9 @@ class _UsersListBodyState extends State<_UsersListBody> {
                 onRefresh: () => context.read<UserListCubit>().init(),
                 child: Stack(
                   children: [
+                    // Semi-transparent background creates a layered effect
+                    // Using Stack and Opacity for visual depth
+                    // without affecting content
                     Opacity(
                       opacity: 0.3,
                       child: Container(
@@ -150,6 +155,9 @@ class UserListTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Hero(
+                // Hero widget enables smooth transition animations
+                // Using a consistent tag ensures proper image animation
+                // when navigating between the list and detail views
                 tag: heroImageKey(user.id),
                 child: Image.network(image),
               ),

@@ -12,6 +12,8 @@ void main() async {
 
   ApplicationDependenciesResolver.resolve(NetworkConfigImpl());
 
+  // Restrict app to portrait mode only for consistent UI experience
+  // This prevents layout issues that might occur in landscape orientation
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
