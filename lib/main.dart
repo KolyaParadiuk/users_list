@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:users_list/common/config/network_config.dart';
 import 'package:users_list/common/network/ui/assets.dart';
 import 'package:users_list/di.dart';
 import 'package:users_list/routing/app_router.dart';
@@ -9,7 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  ApplicationDependenciesResolver.resolve();
+  ApplicationDependenciesResolver.resolve(NetworkConfigImpl());
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
