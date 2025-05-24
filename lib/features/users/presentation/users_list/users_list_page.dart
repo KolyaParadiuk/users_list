@@ -12,7 +12,7 @@ import 'package:users_list/common/network/ui/widgets/page_color_box.dart';
 import 'package:users_list/di.dart';
 import 'package:users_list/features/users/domain/entity/user.dart';
 import 'package:users_list/features/users/presentation/resources/hero_image_key.dart';
-import 'package:users_list/features/users/presentation/users_list/user_list_cubit.dart';
+import 'package:users_list/features/users/presentation/users_list/user_list_bloc.dart';
 import 'package:users_list/gen/locale_keys.g.dart';
 import 'package:users_list/routing/app_router.gr.dart';
 
@@ -23,10 +23,10 @@ class UsersListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => di.get<UserListCubit>()..init(),
+      create: (context) => di.get<UserListBloc>()..add(UserListInitEvent()),
       child: Scaffold(
         body: PageColorBox(
-          child: BlocBuilder<UserListCubit, UserListState>(
+          child: BlocBuilder<UserListBloc, UserListState>(
             builder: (context, state) {
               // Using Dart's switch expression to handle different UI states
               // This ensures exhaustive handling of all sealed class variants
@@ -42,7 +42,9 @@ class UsersListPage extends StatelessWidget {
                           height: 12,
                         ),
                         ElevatedButton(
-                          onPressed: () => context.read<UserListCubit>().init(),
+                          onPressed: () => context
+                              .read<UserListBloc>()
+                              .add(UserListInitEvent()),
                           child: Text(
                             LocaleKeys.tryAgain.tr(),
                           ),
@@ -79,7 +81,9 @@ class _UsersListBodyState extends State<_UsersListBody> {
       bottom: false,
       child: LazyLoadingWrapper(
         controller: _scrollController,
-        loadMore: () => context.read<UserListCubit>().loadMoreUsers(),
+        loadMore: () async {
+          context.read<UserListBloc>().add(UserListLoadMoreEvent());
+        },
         child: Column(
           children: [
             Padding(
@@ -93,7 +97,9 @@ class _UsersListBodyState extends State<_UsersListBody> {
             ),
             Expanded(
               child: RefreshIndicator(
-                onRefresh: () => context.read<UserListCubit>().init(),
+                onRefresh: () async {
+                  context.read<UserListBloc>().add(UserListInitEvent());
+                },
                 child: Stack(
                   children: [
                     // Semi-transparent background creates a layered effect

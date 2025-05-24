@@ -5,8 +5,8 @@ import 'package:users_list/features/users/data/repository/users_repository.dart'
 import 'package:users_list/features/users/domain/repository/users_repository.dart';
 import 'package:users_list/features/users/domain/use_cases/get_user_by_id_use_case.dart';
 import 'package:users_list/features/users/domain/use_cases/get_users_use_case.dart';
-import 'package:users_list/features/users/presentation/user_details/user_details_cubit.dart';
-import 'package:users_list/features/users/presentation/users_list/user_list_cubit.dart';
+import 'package:users_list/features/users/presentation/user_details/user_details_bloc.dart';
+import 'package:users_list/features/users/presentation/users_list/user_list_bloc.dart';
 
 class UserFeatureDependencyResolver {
   static void resolve() {
@@ -45,13 +45,13 @@ class UserFeatureDependencyResolver {
 
   static void _presentation() {
     di
-      ..registerFactory<UserListCubit>(
-        () => UserListCubit(
+      ..registerFactory<UserListBloc>(
+        () => UserListBloc(
           getUsersUseCase: di.get<GetUsersUseCase>(),
         ),
       )
-      ..registerFactory<UserDetailsCubit>(
-        () => UserDetailsCubit(
+      ..registerFactory<UserDetailsBloc>(
+        () => UserDetailsBloc(
           getUserByIdUseCase: di.get<GetUserByIdUseCase>(),
         ),
       );

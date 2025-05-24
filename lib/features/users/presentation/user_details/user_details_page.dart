@@ -14,7 +14,7 @@ import 'package:users_list/common/network/ui/widgets/page_color_box.dart';
 import 'package:users_list/di.dart';
 import 'package:users_list/features/users/domain/entity/user.dart';
 import 'package:users_list/features/users/presentation/resources/hero_image_key.dart';
-import 'package:users_list/features/users/presentation/user_details/user_details_cubit.dart';
+import 'package:users_list/features/users/presentation/user_details/user_details_bloc.dart';
 import 'package:users_list/gen/locale_keys.g.dart';
 
 const headerHeight = 211.0;
@@ -31,10 +31,11 @@ class UserDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => di.get<UserDetailsCubit>()..init(userId),
+      create: (context) =>
+          di.get<UserDetailsBloc>()..add(UserDetailsInitEvent(userId)),
       child: Scaffold(
         body: PageColorBox(
-          child: BlocBuilder<UserDetailsCubit, UserDetailsState>(
+          child: BlocBuilder<UserDetailsBloc, UserDetailsState>(
             builder: (context, state) {
               return switch (state) {
                 UserDetailsInitial() => const LoadingWidget(),
